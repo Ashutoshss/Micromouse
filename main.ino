@@ -7,6 +7,9 @@
 #include <Adafruit_Sensor.h>
 #include <Wire.h>
 
+const int base_speed = 128; // Adjust as needed
+const int max_speed = 255; 
+
 // Define TB6612FNG pin connections
 #define MOTOR1_IN1 2 
 #define MOTOR1_IN2 3 
@@ -165,11 +168,38 @@ void loop() {
   // g.gyro.z
 
   // idhar main logic 
-  // upar buzzer initalize karna hai aur correct pins assign karna hai motor ke
-  
+  angle error 
+  float controlSignal = straight_pid.calculate(error_angle);
+  motor_controller(controlSignal);
   
 }
 
-void motor(){
-  // motor wala code idhar likhna hai, both left and right two parameter ho ga
+void motor_controller(float controlSignal){
+  float left_speed = base_speed + controlSignal; 
+  float right_speed = base_speed - controlSignal; 
+  
+  left_speed = constrain(left_speed, 0, 255);
+  right_speed = constrain(right_speed, 0, 255);
+
+  if (left_speed >= 0) {
+    digitalWrite(MOTOR1_IN1, HIGH);
+    digitalWrite(MOTOR1_IN2, LOW);
+  } else {
+    digitalWrite(MOTOR1_IN1, LOW);
+    digitalWrite(MOTOR1_IN2, HIGH);
+    left_speed = -left_speed; // Convert negative speed to positive for PWM
+  }
+
+  if (right_speed >= 0) {
+    digitalWrite(MOTOR2_IN1, HIGH);
+    digitalWrite(MOTOR2_IN2, LOW);
+  } else {
+    digitalWrite(MOTOR2_IN1, LOW);
+    digitalWrite(MOTOR2_IN2, HIGH);
+    right_speed = -right_speed;
+  }
+
+  // Set motor speeds using PWM
+  analogWrite(MOTOR1_PWM, left_speed);
+  analogWrite(MOTOR2_PWM, right_speed);
 }
