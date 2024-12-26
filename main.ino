@@ -10,14 +10,16 @@
 const int base_speed = 128; // Adjust as needed
 const int max_speed = 255; 
 
+#define Buzzer 1
+
 // Define TB6612FNG pin connections
-#define MOTOR1_IN1 2 
-#define MOTOR1_IN2 3 
-#define MOTOR1_PWM 9 
-#define MOTOR2_IN1 5 
-#define MOTOR2_IN2 6 
-#define MOTOR2_PWM 10 
-#define STBY 7
+#define MOTOR1_IN1 35
+#define MOTOR1_IN2 34
+#define MOTOR1_PWM 32
+#define MOTOR2_IN1 12
+#define MOTOR2_IN2 14
+#define MOTOR2_PWM 27 
+#define STBY 26
 
 // Define the I2C addresses for the VL53L0X sensors
 #define VL53L0X_ADDRESS_1 0x30
@@ -31,9 +33,9 @@ const int max_speed = 255;
 float gyroX, gyroY, gyroZ;
 
 // Define the XSHUT pins for the VL53L0X sensors
-#define XSHUT_1 2
-#define XSHUT_2 3
-#define XSHUT_3 4
+#define XSHUT_1 4
+#define XSHUT_2 16
+#define XSHUT_3 17
 
 // Create an object for the MPU6050 sensor
 Adafruit_MPU6050 mpu;
@@ -56,7 +58,8 @@ void setup() {
   // while(!Serial){
   //   delay(1);
   // }
-  
+
+  pinMode(Buzzer,OUTPUT);
   pinMode(STBY, HIGH); // Enable motor driver
   pinMode(MOTOR1_IN1, OUTPUT);
   pinMode(MOTOR1_IN2, OUTPUT);
