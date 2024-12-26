@@ -163,9 +163,13 @@ void loop() {
   // measure2.RangeMilliMeter
   // measure3.RangeMilliMeter
   // g.gyro.z
+
+  // idhar main logic 
+  // upar buzzer initalize karna hai aur correct pins assign karna hai motor ke
+  
   
 }
 
 void motor(){
-  
+  // motor wala code idhar likhna hai, both left and right two parameter ho ga
 }
