@@ -146,9 +146,8 @@ class PIDController {
     float output;
 };
 
-void motor(){
-  
-}
+PIDController straight_pid(0.5, 0.01, 0.1); 
+PIDController turn_pid(1.0, 0.05, 0.2); 
 
 void loop() {
   // Take measurements from each VL53L0X sensor
@@ -160,9 +159,13 @@ void loop() {
   sensors_event_t a, g, temp;
   mpu.getEvent(&a, &g, &temp);
   
-  Serial.print(measure1.RangeMilliMeter);
-  Serial.print(measure2.RangeMilliMeter);
-  Serial.print(measure3.RangeMilliMeter);
-  Serial.print(g.gyro.z);
+  // measure1.RangeMilliMeter
+  // measure2.RangeMilliMeter
+  // measure3.RangeMilliMeter
+  // g.gyro.z
+  
+}
+
+void motor(){
   
 }
