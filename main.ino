@@ -1,3 +1,6 @@
+// Author List:		[ Ashutosh Singh ]
+// Filename:		    main.ino
+
 // Include the libraries for the VL53L0X and MPU6050 sensors
 #include "Adafruit_VL53L0X.h"
 #include <Adafruit_MPU6050.h>
