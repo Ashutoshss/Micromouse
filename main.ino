@@ -73,46 +73,11 @@ void setup() {
   pinMode(XSHUT_2,OUTPUT);
   pinMode(XSHUT_3,OUTPUT);
 
-  // Assign addresses to the VL53L0X sensors
-  // Shut down all sensors to begin the address assignment process
-  digitalWrite(XSHUT_1, LOW);
-  digitalWrite(XSHUT_2, LOW);
-  digitalWrite(XSHUT_3, LOW);
-  delay(10);
-
-  // Turn on all sensors
-  digitalWrite(XSHUT_1, HIGH);
-  digitalWrite(XSHUT_2, HIGH);
-  digitalWrite(XSHUT_3, HIGH);
-  delay(10);
-
-  // Initialize each VL53L0X sensor with a unique address
-  // Sensor 1
-  digitalWrite(XSHUT_1, HIGH);
-  digitalWrite(XSHUT_2, LOW);
-  digitalWrite(XSHUT_3, LOW);
-  if(!lox1.begin(VL53L0X_ADDRESS_1)){
-    Serial.println(F("Failed to boot first VL53L0X"));
-    while(1);
-  }
-  delay(10);
-
-  // Sensor 2
-  digitalWrite(XSHUT_2, HIGH);
-  if(!lox2.begin(VL53L0X_ADDRESS_2)){
-    Serial.println(F("Failed to boot second VL53L0X"));
-    while(1);
-  }
-  delay(10);
-
-  // Sensor 3
-  digitalWrite(XSHUT_3, HIGH);
-  if(!lox3.begin(VL53L0X_ADDRESS_3)){
-    Serial.println(F("Failed to boot third VL53L0X"));
-    while(1);
-  }
-  delay(10);
-
+  // Initialize VL53L0X sensors
+  initializeVL53L0X(lox1, XSHUT_1, VL53L0X_ADDRESS_1);
+  initializeVL53L0X(lox2, XSHUT_2, VL53L0X_ADDRESS_2);
+  initializeVL53L0X(lox3, XSHUT_3, VL53L0X_ADDRESS_3);
+  
   // Initialize the MPU6050 sensor
   if (!mpu.begin(MPU6050_ADDRESS)) {
     Serial.println("Failed to find MPU6050 chip");
