@@ -1,8 +1,8 @@
 // A class to compute the control signal
 class SimplePID{
   private:
-    float kp, kd, ki, umax; // Parameters
-    float eprev, eintegral; // Storage
+    float kp, kd, ki, umax; // Parameters // kp,kd,ki are the gain terms
+    float eprev, eintegral; // store the previous error and the sum of the previous error that is the integral
 
   public:
   // Constructor
